@@ -1,14 +1,14 @@
 import Todo from '../Module/TodoModule.js'
 let Todoinsert=async (req,res)=>{
-    const {title,description,completed,dueDate}=req.body;
-    if (!title||!description||!completed||!dueDate){
+    const {title,description,dueDate}=req.body;
+    if (!title||!description||!dueDate){
         return res.status(400).json({message:"All fields are required"});
     }
     try {
     const todo = new Todo({
       title,
       description,
-      completed,
+    
       dueDate
     });
 
