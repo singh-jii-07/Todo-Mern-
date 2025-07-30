@@ -1,4 +1,4 @@
-import todoUser from '../Module/TodoUser'
+import todoUser from '../Module/TodoUser.js'
 let totoresgister= async (req,res)=>{
     const {name,email,password}=req.body;
     if (!name || !email || !password) {
@@ -19,7 +19,7 @@ let totoresgister= async (req,res)=>{
     catch(err){
         res.status(500).json({
             message:"Internal Server Error",
-            error: err.message
+            error: err
         })
     }
 }

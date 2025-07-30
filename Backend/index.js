@@ -2,6 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import todoRoutes from './App/Routes/TodoRoutes.js'
+import todouserRoute from './App/Routes/TodoUserRoutes.js';
 
 dotenv.config();
 
@@ -10,6 +11,7 @@ const app = express();
 app.use(express.json());
 
 app.use('/api/todo', todoRoutes)
+app.use('/api/todo',todouserRoute)
 
 
 mongoose.connect(process.env.MONGO_URI )
