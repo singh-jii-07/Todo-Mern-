@@ -52,8 +52,33 @@ const Todoget= async(req,res)=>{
                 res.status(500).json({ message: "Internal Server Error", error: err.message });
             }
  }
+ const TodoUpadate= async (req,res)=>{
+  try{
+  const {id}=req.headers;
+  if (!id) {
+    return res.status(400).json({ message: "ID is required" });
+  }
+  const TodoUpadate= await Todo.findByIdAndUpdate(id,{
+    title: req.body.title,
+    description: req.body.description,
+    dueDate: req.body.dueDate
+  }, { new: true });
+  if (!TodoUpadate) {
+    return res.status(404).json({ message: "Todo not found" });
+  }
+  res.status(200).json({
+    message: "Todo updated successfully",
+    TodoUpadate });
+
+  }
+  catch (err){
+    res.status(500).json({ message: "Internal Server Error", error: err.message });
+  }
+ }
+
 export {
   Todoinsert,
   Todoget,
-    TodoDelet
+  TodoDelet,
+  TodoUpadate
 };
