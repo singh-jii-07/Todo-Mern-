@@ -10,6 +10,8 @@ const app = express();
 app.use(express.json());
 
 app.use('/api/todo', todoRoutes)
+
+
 mongoose.connect(process.env.MONGO_URI )
 .then(()=>{
     console.log("Connected to MongoDB");

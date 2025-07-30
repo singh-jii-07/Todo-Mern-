@@ -23,4 +23,21 @@ let Todoinsert=async (req,res)=>{
     res.status(500).json({ message: "Internal Server Error" });
   }
 }
-export default Todoinsert;
+
+const Todoget= async(req,res)=>{
+    try{
+        const todos= await Todo.find()
+        res.status(201).json({
+            message:"Todos fetched successfully",
+            todos
+        })
+    }
+    catch(error){
+ res.status(500).json({ message: "Internal Server Error",error });
+    }
+}
+
+export {
+  Todoinsert,
+  Todoget
+};
