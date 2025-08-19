@@ -1,29 +1,25 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
-const Login = () => {
-  const [form, setForm] = useState({ name: "", password: "" });
-const navigate = useNavigate();
+const Register = () => {
+  const [form, setForm] = useState({ name: "", email: "", password: "" });
+  const navigate = useNavigate();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
-      const res = await axios.post("http://localhost:4000/api/todo/login", form);
+      const res = await axios.post("http://localhost:4000/api/todo/register", form);
+      console.log("✅ Registered Successfully:", res.data);
 
-      console.log("✅ Login Success:", res.data);
+      
+      setForm({ name: "", email: "", password: "" });
 
-      localStorage.setItem("token", res.data.token);
-
-     
-      setForm({ name: "", password: "" });
-
-     
-      navigate("/home");
-
+    
+      navigate("/");
     } catch (error) {
       if (error.response) {
-        console.log(`❌ ${error.response.data.message || "Login failed!"}`);
+        console.log(`❌ ${error.response.data.message || "Registration failed!"}`);
       } else {
         console.log("❌ Something went wrong!");
       }
@@ -38,50 +34,56 @@ const navigate = useNavigate();
         className="bg-white p-8 rounded-2xl shadow-lg w-96"
       >
         <h2 className="text-3xl font-bold text-center mb-6 text-blue-600">
-          Login
+          Register
         </h2>
 
-        
+       
         <input
           type="text"
           name="name"
           placeholder="Enter your name"
           value={form.name}
-          onChange={(e) =>
-            setForm({ ...form, [e.target.name]: e.target.value })
-          }
+          onChange={(e) => setForm({ ...form, [e.target.name]: e.target.value })}
           className="w-full px-4 py-2 mb-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
         />
 
         
         <input
+          type="email"
+          name="email"
+          placeholder="Enter your email"
+          value={form.email}
+          onChange={(e) => setForm({ ...form, [e.target.name]: e.target.value })}
+          className="w-full px-4 py-2 mb-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+        />
+
+      
+        <input
           type="password"
           name="password"
           placeholder="Enter your password"
           value={form.password}
-          onChange={(e) =>
-            setForm({ ...form, [e.target.name]: e.target.value })
-          }
+          onChange={(e) => setForm({ ...form, [e.target.name]: e.target.value })}
           className="w-full px-4 py-2 mb-6 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
         />
 
-   
+       
         <button
           type="submit"
           className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition duration-200"
         >
-          Login
+          Register
         </button>
 
         <p className="text-center text-sm text-gray-600 mt-4">
-          Don’t have an account?{" "}
-          <a href="/register" className="text-blue-600 hover:underline">
-            Register
-          </a>
+          Already have an account?{" "}
+          <Link to="/" className="text-blue-600 hover:underline">
+            Login
+          </Link>
         </p>
       </form>
     </div>
   );
 };
 
-export default Login;
+export default Register;
