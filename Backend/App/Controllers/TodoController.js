@@ -1,6 +1,6 @@
 import Todo from '../Module/TodoModule.js'
 let Todoinsert=async (req,res)=>{
-    const {title,description,dueDate}=req.body;
+    const {title,description,dueDate,userid}=req.body;
     if (!title||!description||!dueDate){
         return res.status(400).json({message:"All fields are required"});
     }
@@ -8,7 +8,7 @@ let Todoinsert=async (req,res)=>{
     const todo = new Todo({
       title,
       description,
-    
+      userid,
       dueDate
     });
 
@@ -75,10 +75,32 @@ const Todoget= async(req,res)=>{
     res.status(500).json({ message: "Internal Server Error", error: err.message });
   }
  }
+ const TodogetByUser = async (req, res) => {
+  try {
+    const { userid } = req.headers;  
+    if (!userid) {
+      return res.status(400).json({ message: "User ID is required" });
+    }
+
+    const todos = await Todo.find({ userid });
+
+    if (todos.length === 0) {
+      return res.status(404).json({ message: "No todos found for this user" });
+    }
+
+    res.status(200).json({
+      message: "Todos fetched successfully for user",
+      todos
+    });
+  } catch (error) {
+    res.status(500).json({ message: "Internal Server Error", error });
+  }
+};
 
 export {
   Todoinsert,
   Todoget,
   TodoDelet,
-  TodoUpadate
+  TodoUpadate,
+  TodogetByUser
 };

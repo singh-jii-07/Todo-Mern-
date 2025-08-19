@@ -20,6 +20,10 @@ const todoSchema = new mongoose.Schema({
   createdAt: {
     type: Date,
     default: Date.now
+  },
+  userid: {   
+    type: String,
+    required: true
   }
 })
 const Todo=mongoose.model('Todo', todoSchema);
