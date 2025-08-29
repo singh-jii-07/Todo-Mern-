@@ -34,9 +34,14 @@ let todologin =async (req,res)=>{
         if (!user) {
             return res.status(404).json({message:"User not found"});
         }
+          const token = jwt.sign(
+      { id: user._id }, 
+      process.env.JWT_SECRET, 
+      { expiresIn: "1h" } 
+    );
         res.status(200).json({
             message:"User logged in successfully",
-            user
+            token
         })
     }
     catch(err){

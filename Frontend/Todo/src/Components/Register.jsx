@@ -19,9 +19,9 @@ const Register = () => {
       navigate("/");
     } catch (error) {
       if (error.response) {
-        console.log(`❌ ${error.response.data.message || "Registration failed!"}`);
+        console.log(` ${error.response.data.message || "Registration failed!"}`);
       } else {
-        console.log("❌ Something went wrong!");
+        console.log(" Something went wrong!");
       }
       console.error("Error:", error);
     }
