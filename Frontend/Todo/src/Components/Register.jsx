@@ -8,6 +8,7 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log("hello")
     try {
       const res = await axios.post("http://localhost:4000/api/todo/register", form);
       console.log("✅ Registered Successfully:", res.data);

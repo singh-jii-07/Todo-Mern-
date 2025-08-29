@@ -1,10 +1,10 @@
 import React from 'react'
-import Login from '../Login'
+import TodoForm from '../Todo'
 
 const Home = () => {
   return (
     <div>
-     <Login/>
+     <TodoForm/>
     </div>
   )
 }

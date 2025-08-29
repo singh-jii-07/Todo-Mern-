@@ -14,6 +14,8 @@ const navigate = useNavigate();
       console.log("✅ Login Success:", res.data);
 
       localStorage.setItem("token", res.data.token);
+      console.log(res.data)
+      localStorage.setItem("userid", res.data.userid)
 
      
       setForm({ name: "", password: "" });

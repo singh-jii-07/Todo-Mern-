@@ -1,5 +1,5 @@
 import todoUser from '../Module/TodoUser.js'
-import dotenv from 'dotenv'
+import dotenv from 'dotenv' 
 import jwt from 'jsonwebtoken'
 dotenv.config()
 let totoresgister= async (req,res)=>{
@@ -13,10 +13,10 @@ let totoresgister= async (req,res)=>{
             email,
             password
         })
+        await user.save();
          const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
       expiresIn: "1h",
     });
-        await user.save();
         res.status(201).json({
             message:"User registered successfully",
             user,
@@ -48,7 +48,8 @@ let todologin =async (req,res)=>{
     );
         res.status(200).json({
             message:"User logged in successfully",
-            token
+            token: token,
+  userid: user._id,
         })
     }
     catch(err){
