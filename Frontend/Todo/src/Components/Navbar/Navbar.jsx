@@ -5,6 +5,7 @@ const Navbar = () => {
   const navbar = [
     { name: "Home", path: "/home" },
     { name: "Todo", path: "/todo" },
+    {name:"Profile", path:"/profile"}
   ];
 
   return (
