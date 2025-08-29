@@ -59,7 +59,25 @@ let todologin =async (req,res)=>{
         })
     }
 }
+
+const todouser= async(req,res)=>{
+try{
+const{id}=req.headers;
+const data=await todoUser.findById(id);
+return res.status(200).json({
+    message: "User authenticated successfully",
+    data
+})
+}
+catch (err){
+    console.error("Authentication Error:", err);
+    res.status(500).json({ message: "Internal Server Error", error: err.message || err });
+}
+}
+
+
 export {
     totoresgister,
-    todologin
+    todologin,
+    todouser
 }
