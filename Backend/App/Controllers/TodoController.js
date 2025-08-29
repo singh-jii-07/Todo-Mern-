@@ -1,6 +1,9 @@
 import Todo from '../Module/TodoModule.js'
+
 let Todoinsert=async (req,res)=>{
-    const {title,description,dueDate,userid}=req.body;
+    const {title,description,dueDate}=req.body;
+    const userId = req.user.id;
+
     if (!title||!description||!dueDate){
         return res.status(400).json({message:"All fields are required"});
     }
@@ -8,7 +11,7 @@ let Todoinsert=async (req,res)=>{
     const todo = new Todo({
       title,
       description,
-      userid,
+      userid: userId, 
       dueDate
     });
 
