@@ -38,16 +38,7 @@ function App() {
           <Home />
         </div>
       ),
-    },
-    {
-      path: "/todo",
-      element: (
-        <div>
-          <Navbar />
-          <Todo />
-        </div>
-      ),
-    },
+    }
   ]);
 
   return (
