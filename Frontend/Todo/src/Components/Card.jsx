@@ -60,7 +60,7 @@ function Card() {
                   {profile.name ? profile.name.charAt(0).toUpperCase() : "U"}
                 </div>
               </div>
-
+                
           
               <h2 className="text-3xl font-bold text-gray-800">
                 {profile.name}
